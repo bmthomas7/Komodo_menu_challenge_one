@@ -12,7 +12,7 @@ namespace Repository_Menu_Console
         private MenuContentRepository _contentRepo = new MenuContentRepository();
         public void Run()
         {
-            
+            seedContentList();
             Menu();
         }
 
@@ -89,6 +89,7 @@ namespace Repository_Menu_Console
             string priceAsString = Console.ReadLine();
             newContent.Price = double.Parse(priceAsString);
 
+            _contentRepo.AddContentToList(newContent);
         }
 
         private void DisplayAllContent()
@@ -112,7 +113,7 @@ namespace Repository_Menu_Console
 
             Console.WriteLine("enter a meal number you woud like to display");
 
-            int menuNumber = Console.ReadLine();
+            int menuNumber = int.Parse(Console.ReadLine());
 
             MenuContent content = _contentRepo.GetContentByNumber(menuNumber);
 
@@ -135,7 +136,7 @@ namespace Repository_Menu_Console
 
             //ask for number to update
             Console.WriteLine("enter the Meal Number you would like to update");
-            string oldContent = Console.ReadLine();
+            int oldContent = int.Parse(Console.ReadLine());
             
 
             MenuContent newContent = new MenuContent();
@@ -175,7 +176,7 @@ namespace Repository_Menu_Console
 
             Console.WriteLine("\nEnter the meal number you would like to delete");
 
-            string input = Console.ReadLine();
+            int input = int.Parse(Console.ReadLine());
 
             bool wasDeleted = _contentRepo.RemoveContentFromList(input);
 
